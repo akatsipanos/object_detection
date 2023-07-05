@@ -15,38 +15,15 @@ class FruitDataset(torch.utils.data.Dataset):
         self.imgs = glob.glob(os.path.join(self.root, '*.jpg'))
         self.info = glob.glob(os.path.join(self.root, '*.xml'))
     
-    # def generate_data(self):
-    #     data_path = self.info
-    #     data = []
-    #     target = {}
-    #     boxes = []
-    #     img_id = []
-    #     labels = []
-
-    #     for i in data_path:
-    #         with open(i,'r') as f:
-    #             a = f.read()
-    #         b = xmltodict.parse(a)['annotation']
-    #         for i in b['object']:
-    #             boxes.append([int(b['object']['bndbox']['xmin']),
-    #                         int(b['object']['bndbox']['ymin']),
-    #                         int(b['object']['bndbox']['xmax']), 
-    #                         int(b['object']['bndbox']['ymax'])])
-    #     target['boxes'] = boxes
-    #     return target
-
     def __getitem__(self,idx):
-        # img_path = os.path.join(self.root, self.imgs[idx])
         img_path = self.imgs[idx]
         img = Image.open(img_path).convert('RGB')
 
         data_path = self.info
-        data = []
         target = {}
         boxes = []
-        img_id = []
         labels = []
-        label_dict = {'apple':1, 'banana': 2, 'orange':3}
+        label_dict = {'apple':0, 'banana': 1, 'orange':2}
 
         with open(data_path[idx],'r') as f:
             a = f.read()
@@ -70,10 +47,13 @@ class FruitDataset(torch.utils.data.Dataset):
 
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
         target['boxes'] = boxes
-        target['labels'] = torch.as_tensor(labels, dtype=torch.int16)
-        target['image_id'] = torch.as_tensor(idx, dtype=torch.int16)
+        target['labels'] = torch.as_tensor(labels, dtype=torch.int64)
+        target['img_id'] = torch.as_tensor(idx, dtype=torch.int64)
         area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
         target['area'] = area
+
+        if self.transforms is not None:
+            img, target = self.transforms(img, target)
 
         return img, target
     
