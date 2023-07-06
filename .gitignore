@@ -1,3 +1,4 @@
 /vision/
 *.pt
 first_model.pt
+/__pycache__/

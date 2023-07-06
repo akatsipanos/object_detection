@@ -1,6 +1,6 @@
-import numpy as np
 #%%
-from PIL import Image
+import sys
+sys.path.append('C:/Users/AndrewKatsipanos/Documents/object_detection/vision_scipts')
 import torch
 import torchvision
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor, FasterRCNN_ResNet50_FPN_Weights
@@ -72,7 +72,6 @@ def main():
         train_one_epoch(model,optimizer, data_loader_train, device, epoch, print_freq=10)
         lr_scheduler.step()
         evaluate(model, data_loader_test, device=device)
-        # print(f'\nFinished training epoch {epoch}\n')
     return model
 
 if __name__=='__main__':

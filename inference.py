@@ -30,6 +30,7 @@ def show_prediction(idx, data_path):
         img1.rectangle((x0,y0,x1,y1), outline='red')
 
     img.show()
+    return pred
 
 if __name__ == '__main__':
-    show_prediction(idx=10, data_path='data/test')
+    pred = show_prediction(idx=80, data_path='data/train')
