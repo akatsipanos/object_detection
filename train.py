@@ -76,5 +76,5 @@ def main():
     return model
 
 if __name__=='__main__':
-    main()
+    model = main()
 #%%
