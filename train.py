@@ -48,12 +48,12 @@ def main():
 
     torch.manual_seed(1)
     data_loader_train = torch.utils.data.DataLoader(dataset_train,
-                                                    batch_size=8,
+                                                    batch_size=4,
                                                     shuffle=True,
                                                     collate_fn=utils.collate_fn)
 
     data_loader_test = torch.utils.data.DataLoader(dataset_test,
-                                                    batch_size = 8,
+                                                    batch_size = 4,
                                                     shuffle = True,
                                                     collate_fn=utils.collate_fn)
 
@@ -67,7 +67,7 @@ def main():
     optimizer = torch.optim.SGD(params, lr=0.005, momentum=0.9, weight_decay=0.0005)
     lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma=0.1)
 
-    num_epochs = 10
+    num_epochs = 75
     for epoch in range(num_epochs):
         train_one_epoch(model,optimizer, data_loader_train, device, epoch, print_freq=10)
         lr_scheduler.step()
@@ -76,4 +76,5 @@ def main():
 
 if __name__=='__main__':
     model = main()
+    torch.save(model,'second_model.pt')
 #%%

@@ -12,7 +12,7 @@ def show_prediction(idx, data_path):
         dataset = FruitDataset(data_path, get_transform(train=False))
     img_tensor,_ = dataset[idx]
     model = get_instance_segmentation_modified(num_classes=3)
-    model.load_state_dict(torch.load('first_model.pt'))
+    model.load_state_dict(torch.load('second_model.pt'))
     model.eval()
     device = torch.device('cpu')
     with torch.no_grad():

@@ -6,7 +6,6 @@ import glob
 import torch
 import torch.utils.data
 import xmltodict
-# from torchvision import datasets 
 
 class FruitDataset(torch.utils.data.Dataset):
     def __init__(self, root, transforms=None):
