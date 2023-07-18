@@ -9,7 +9,7 @@ from torchvision.models.detection.rpn import AnchorGenerator
 from dataset import FruitDataset
 from engine import train_one_epoch, evaluate
 import utils
-import transforms as T
+import vision_scipts.transforms as T
 
 def get_instance_segmentation(num_classes):
     model = torchvision.models.detection.fasterrcnn_resnet50_fpn(weights = FasterRCNN_ResNet50_FPN_Weights.DEFAULT)
