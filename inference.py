@@ -33,4 +33,4 @@ def show_prediction(idx, data_path):
     return pred
 
 if __name__ == '__main__':
-    pred = show_prediction(idx=80, data_path='data/train')
+    pred = show_prediction(idx=20, data_path='data/train')

@@ -76,5 +76,5 @@ def main():
 
 if __name__=='__main__':
     model = main()
-    torch.save(model,'second_model.pt')
+    torch.save(model.state_dict(),'second_model.pt')
 #%%
